@@ -4,7 +4,6 @@ using Nez.Tweens;
 using System.Collections;
 using Microsoft.Xna.Framework.Graphics;
 
-
 namespace Nez
 {
 	/// <summary>
@@ -40,25 +39,21 @@ namespace Nez
 		/// </summary>
 		public EaseType EaseType = EaseType.QuartOut;
 
-		Effect _windEffect;
-		Rectangle _destinationRect;
-
+		private Effect _windEffect;
+		private Rectangle _destinationRect;
 
 		public WindTransition(Func<Scene> sceneLoadAction) : base(sceneLoadAction, true)
 		{
 			_destinationRect = PreviousSceneRender.Bounds;
 
-			// load Effect and set defaults
-			_windEffect = Core.Content.LoadEffect("Content/nez/effects/transitions/Wind.mgfxo");
+			_windEffect = Core.Content.Load<Effect>("nez/effects/transitions/Wind");
 			Size = 0.3f;
 			WindSegments = 100;
 		}
 
-
 		public WindTransition() : this(null)
 		{
 		}
-
 
 		public override IEnumerator OnBeginTransition()
 		{
@@ -73,7 +68,6 @@ namespace Nez
 			// cleanup
 			Core.Content.UnloadEffect(_windEffect.Name);
 		}
-
 
 		public override void Render(Batcher batcher)
 		{
